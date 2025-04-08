@@ -1,19 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import Layout from '@/layouts/layout'
 import TableComponent from '@/components/ui/table'
 import {Button} from "@chakra-ui/react"
 import DrawerComp from '@/components/ui/drawer'
 import { Link } from 'react-router-dom';
+import { getAllClients } from '@/service/clienteService';
 
 export default function clients() {
 
-    const items = [
-        { id: 1, accountNumber: 1, firstName: "Santiago", lastName: "Trespalacios", balance: 999.99 },
-        { id: 2, accountNumber: 2, firstName: "Maria", lastName: "Gonzalez", balance: 1500.50 },
-        { id: 3, accountNumber: 3, firstName: "Carlos", lastName: "Ramirez", balance: 200.00 },
-        { id: 4, accountNumber: 4, firstName: "Ana", lastName: "Martinez", balance: 3000.75 },
-        { id: 5, accountNumber: 5, firstName: "Luis", lastName: "Fernandez", balance: 500.25 }
-    ]
+    const [items, setItems] = useState([]);
+    
+      useEffect(() => {
+        const fetchTransactions = async () => {
+          try {
+            const data = await getAllClients();
+            setItems(data);
+          } catch (error) {
+            console.error("Error al cargar clientes:", error);
+          }
+        };
+    
+        fetchTransactions();
+      }, []);
     
     const accountColumns = [
         { key: "accountNumber", label: "Account Number" },

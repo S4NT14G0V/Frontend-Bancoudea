@@ -1,15 +1,26 @@
-import React from 'react'
-import Layout from '@/layouts/layout'
-import TableComponent from '@/components/ui/table'
-import {Button} from "@chakra-ui/react"
-import DrawerComp from '@/components/ui/drawerTransfer'
+import React, { useEffect, useState } from "react";
+import Layout from '@/layouts/layout';
+import TableComponent from '@/components/ui/table';
+import { Button } from "@chakra-ui/react";
+import DrawerComp from '@/components/ui/drawerTransfer';
 import { Link } from 'react-router-dom';
 import { getAllTransactions } from '@/service/transactionService';
 
+export default function Transactions() {
+  const [items, setItems] = useState([]);
 
-export default function transactions() {
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const data = await getAllTransactions();
+        setItems(data);
+      } catch (error) {
+        console.error("Error al cargar transacciones:", error);
+      }
+    };
 
-  const items = getAllTransactions()
+    fetchTransactions();
+  }, []);
 
   const transactionColumns = [
     { key: "senderAccountNumber", label: "Sender" },
@@ -20,18 +31,18 @@ export default function transactions() {
 
   return (
     <Layout>
-        <div style={{ width: "100%", display: "flex", gap: "1rem" }}>
-            <Button as={Link} to="/" style={{ backgroundColor: "transparent", color: "black", border: "", borderBottom: "3px solid #198ae0", paddingInline: "2rem", borderRadius: "0" }}>
-              Home
-            </Button>
-            <Button as={Link} to="/clients" style={{ backgroundColor: "transparent", color: "black", border: "", borderBottom: "3px solid #198ae0", paddingInline: "2rem", borderRadius: "0" }}>
-              Clients
-            </Button>
-        </div>
-        <TableComponent items={items} columns={transactionColumns}/>
-        <div style={{ width: "100%", display: "flex", gap: "1rem", justifyContent: "start" }}>
-            <DrawerComp/>
-        </div>
-    </Layout> 
-  )
+      <div style={{ width: "100%", display: "flex", gap: "1rem" }}>
+        <Button as={Link} to="/" style={{ backgroundColor: "transparent", color: "black", border: "", borderBottom: "3px solid #198ae0", paddingInline: "2rem", borderRadius: "0" }}>
+          Home
+        </Button>
+        <Button as={Link} to="/clients" style={{ backgroundColor: "transparent", color: "black", border: "", borderBottom: "3px solid #198ae0", paddingInline: "2rem", borderRadius: "0" }}>
+          Clients
+        </Button>
+      </div>
+      <TableComponent items={items} columns={transactionColumns} />
+      <div style={{ width: "100%", display: "flex", gap: "1rem", justifyContent: "start" }}>
+        <DrawerComp />
+      </div>
+    </Layout>
+  );
 }

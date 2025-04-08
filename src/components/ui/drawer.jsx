@@ -7,9 +7,36 @@ import {
   Input,
   Fieldset,
   Field,
+  useDisclosure,
 } from "@chakra-ui/react";
+import { createClient } from "@/service/clienteService";
+import { useState } from "react";
 
 export default function DrawerComp() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [balance, setBalance] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const handleSave = async () => {
+    const newClient = {
+      firstName,
+      lastName,
+      balance: parseFloat(balance),
+    };
+
+    try {
+      const response = await createClient(newClient);
+      console.log("Cliente creado:", response);
+      setFirstName("");
+      setLastName("");
+      setBalance("");
+      onClose();
+    } catch (error) {
+      console.error("Error al crear cliente:", error);
+    }
+  };
+
   return (
     <Drawer.Root>
       <Drawer.Trigger asChild>
@@ -47,26 +74,45 @@ export default function DrawerComp() {
                 <Fieldset.Content>
                   <Field.Root>
                     <Field.Label>First Name</Field.Label>
-                    <Input name="firstName" paddingInline={"1rem"}  />
+                    <Input
+                      placeholder="First Name"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                    />
                   </Field.Root>
 
                   <Field.Root>
                     <Field.Label>Last Name</Field.Label>
-                    <Input name="lastName" paddingInline={"1rem"} />
+                    <Input
+                      placeholder="Last Name"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                    />
                   </Field.Root>
 
                   <Field.Root>
                     <Field.Label>Balance</Field.Label>
-                    <Input name="balance" type="number" paddingInline={"1rem"}  />
+                    <Input
+                      placeholder="Balance"
+                      type="number"
+                      value={balance}
+                      onChange={(e) => setBalance(e.target.value)}
+                    />  
                   </Field.Root>
                 </Fieldset.Content>
               </Fieldset.Root>
             </Drawer.Body>
             <Drawer.Footer>
-              <Button variant="outline" paddingInline={"2rem"}>
+              <Button
+                variant="outline"
+                paddingInline={"2rem"}
+                onClick={onClose}
+              >
                 Cancel
               </Button>
-              <Button paddingInline={"2rem"}>Save</Button>
+              <Button paddingInline={"2rem"} onClick={handleSave}>
+                Save
+              </Button>
             </Drawer.Footer>
             <Drawer.CloseTrigger asChild>
               <CloseButton size="sm" />
