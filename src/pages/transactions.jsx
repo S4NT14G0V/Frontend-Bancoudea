@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from "react";
-import Layout from '@/layouts/layout';
-import TableComponent from '@/components/ui/table';
-import { Button } from "@chakra-ui/react";
-import DrawerComp from '@/components/ui/drawerTransfer';
-import { Link } from 'react-router-dom';
-import { getAllTransactions } from '@/service/transactionService';
+import Layout from "@/layouts/layout";
+import { getAllTransactions } from "@/service/transactionService";
+import Drawer from "@/components/mui/drawerTransfer";
+import Table from "@/components/mui/table";
+import Navbar from "@/components/mui/navbar";
 
 export default function Transactions() {
   const [items, setItems] = useState([]);
 
-  useEffect(() => {
-    const fetchTransactions = async () => {
-      try {
-        const data = await getAllTransactions();
-        setItems(data);
-      } catch (error) {
-        console.error("Error al cargar transacciones:", error);
-      }
-    };
+  const fetchTransactions = async () => {
+    try {
+      const data = await getAllTransactions();
+      setItems(data);
+    } catch (error) {
+      console.error("Error al cargar transacciones:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchTransactions();
   }, []);
 
@@ -31,17 +30,10 @@ export default function Transactions() {
 
   return (
     <Layout>
-      <div style={{ width: "100%", display: "flex", gap: "1rem" }}>
-        <Button as={Link} to="/" style={{ backgroundColor: "transparent", color: "black", border: "", borderBottom: "3px solid #198ae0", paddingInline: "2rem", borderRadius: "0" }}>
-          Home
-        </Button>
-        <Button as={Link} to="/clients" style={{ backgroundColor: "transparent", color: "black", border: "", borderBottom: "3px solid #198ae0", paddingInline: "2rem", borderRadius: "0" }}>
-          Clients
-        </Button>
-      </div>
-      <TableComponent items={items} columns={transactionColumns} />
-      <div style={{ width: "100%", display: "flex", gap: "1rem", justifyContent: "start" }}>
-        <DrawerComp />
+      <Navbar variant="transactions" />
+      <Table items={items} columns={transactionColumns} />
+      <div style={{ width: "100%", display: "flex", gap: "1rem", justifyContent: "start"}} >
+        <Drawer onTransferCreated={fetchTransactions} />
       </div>
     </Layout>
   );

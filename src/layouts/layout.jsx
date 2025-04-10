@@ -1,11 +1,23 @@
-import React from 'react'
+import React from "react";
 
 function simpleLayout({ children }) {
   return (
-    <div style={{ backgroundColor: '#f0f0f0', height: '100vh', width: '100vw', padding: "10%", display: "flex", justifyContent: "center", alignItems:"center", flexDirection: "column", gap: "2rem" }}>
-        {children}
+    <div
+      style={{
+        backgroundColor: "#fbfbfb",
+        height: "100vh",
+        width: "100vw",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        padding: "2rem 6rem",
+        gap: "2rem",
+        alignItems: "center",
+      }}
+    >
+      {children}
     </div>
-  )
+  );
 }
 
-export default simpleLayout
+export default simpleLayout;

@@ -45,7 +45,7 @@ export const updateClient = async (customer) => {
 
 export const deleteClient = async (customer) => {
     try {
-        const response = await axios.delete(`${API_URL}/api/customers`, customer);
+        const response = await axios.delete(`${API_URL}/api/customers`, {data: customer});
         return response.data;
     } catch (error) {
         console.error('Error en deleteClient:', error);
