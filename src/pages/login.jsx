@@ -7,6 +7,7 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
+import Layout from "@/layouts/layout"; // Importa el layout que has creado
 
 export default function LoginPage() {
   const [user, setUser] = useState("");
@@ -19,55 +20,61 @@ export default function LoginPage() {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 10 }} style={{ display: "flex", justifyContent: "center", width: "100%" }}>
-      <Paper
-        elevation={4}
-        sx={{
-          padding: 4,
-          mt: 10,
-          borderRadius: 3,
-          display: "flex",
-          flexDirection: "column",
-          gap: 3,
-          width: "100%",
-        }}
+    <Layout>
+      <Container
+        maxWidth="sm"
+        sx={{ mt: 10 }}
+        style={{ display: "flex", justifyContent: "center", width: "100%" }}
       >
-        <Typography variant="h4" align="center" fontWeight="bold">
-          Login
-        </Typography>
-        <form onSubmit={handleLogin}>
-          <Box display="flex" flexDirection="column" gap={2}>
-            <TextField
-              label="User"
-              variant="outlined"
-              type="user"
-              value={user}
-              onChange={(e) => setUser(e.target.value)}
-              required
-              fullWidth
-            />
-            <TextField
-              label="Password"
-              variant="outlined"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              fullWidth
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              fullWidth
-              size="large"
-              sx={{ mt: 1 }}
-            >
-              Login
-            </Button>
-          </Box>
-        </form>
-      </Paper>
-    </Container>
+        <Paper
+          elevation={4}
+          sx={{
+            padding: 4,
+            mt: 10,
+            borderRadius: 3,
+            display: "flex",
+            flexDirection: "column",
+            gap: 3,
+            width: "100%",
+          }}
+        >
+          <Typography variant="h4" align="center" fontWeight="bold">
+            Login
+          </Typography>
+          <form onSubmit={handleLogin}>
+            <Box display="flex" flexDirection="column" gap={2}>
+              <TextField
+                label="User"
+                variant="outlined"
+                type="user"
+                value={user}
+                onChange={(e) => setUser(e.target.value)}
+                required
+                fullWidth
+              />
+              <TextField
+                label="Password"
+                variant="outlined"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                fullWidth
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                fullWidth
+                size="large"
+                sx={{ mt: 1 }}
+              >
+                Login
+              </Button>
+            </Box>
+          </form>
+        </Paper>
+      </Container>
+    </Layout>
   );
 }
