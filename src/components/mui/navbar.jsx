@@ -8,7 +8,7 @@ export default function navbar({ variant }) {
       {variant === "clients" && (
         <div style={{ width: "100%", display: "flex", gap: "1rem" }}>
           <Button
-            as={Link}
+            component={Link}
             to="/"
             style={{
               backgroundColor: "transparent",
@@ -44,7 +44,7 @@ export default function navbar({ variant }) {
             Clients
           </Button>
           <Button
-            as={Link}
+            component={Link}
             to="/transactions"
             style={{
               backgroundColor: "transparent",
@@ -63,7 +63,7 @@ export default function navbar({ variant }) {
             Transactions
           </Button>
           <Button
-            as={Link}
+            component={Link}
             to="/clienttransactions"
             style={{
               backgroundColor: "transparent",
@@ -86,7 +86,7 @@ export default function navbar({ variant }) {
       {variant === "transactions" && (
         <div style={{ width: "100%", display: "flex", gap: "1rem" }}>
           <Button
-            as={Link}
+            component={Link}
             to="/"
             style={{
               backgroundColor: "transparent",
@@ -105,7 +105,7 @@ export default function navbar({ variant }) {
             Home
           </Button>
           <Button
-            as={Link}
+            component={Link}
             to="/clients"
             style={{
               backgroundColor: "transparent",
@@ -141,7 +141,7 @@ export default function navbar({ variant }) {
             Transactions
           </Button>
           <Button
-            as={Link}
+            component={Link}
             to="/clienttransactions"
             style={{
               backgroundColor: "transparent",
@@ -164,7 +164,7 @@ export default function navbar({ variant }) {
       {variant === "clienttransactions" && (
         <div style={{ width: "100%", display: "flex", gap: "1rem" }}>
           <Button
-            as={Link}
+            component={Link}
             to="/"
             style={{
               backgroundColor: "transparent",
@@ -183,7 +183,7 @@ export default function navbar({ variant }) {
             Home
           </Button>
           <Button
-            as={Link}
+            component={Link}
             to="/clients"
             style={{
               backgroundColor: "transparent",
@@ -202,7 +202,7 @@ export default function navbar({ variant }) {
             Clients
           </Button>
           <Button
-            as={Link}
+            component={Link}
             to="/transactions"
             style={{
               backgroundColor: "transparent",
