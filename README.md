@@ -14,6 +14,17 @@ npm install
 npm run dev
 ```
 
+### 3. Entrar a la web
+```bash
+http://localhost:5173
+```
+
+### 4. Ingresar con las credenciales
+```bash
+user: admin
+password: admin
+```
+
 ## 🛠️ Tecnologías utilizadas
 
 - React
